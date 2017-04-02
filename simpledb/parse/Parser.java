@@ -3,6 +3,8 @@ package simpledb.parse;
 import java.util.*;
 import simpledb.query.*;
 import simpledb.record.Schema;
+// To catch in case input string is not a timestamp
+import java.text.ParseException;
 
 /**
  * The SimpleDB parser.
@@ -14,6 +16,7 @@ public class Parser {
    public Parser(String s) {
       lex = new Lexer(s);
    }
+
    
 // Methods for parsing predicates, terms, expressions, constants, and fields
    
@@ -22,10 +25,21 @@ public class Parser {
    }
    
    public Constant constant() {
-      if (lex.matchStringConstant())
-         return new StringConstant(lex.eatStringConstant());
+      
+      if (lex.matchStringConstant()){
+      
+         String inputString = lex.eatStringConstant();
+         try {
+            return new timestamp(inputString);
+         } catch(ParseException e) {
+            return new StringConstant(inputString);
+         }
+
+      }
+
       else
          return new IntConstant(lex.eatIntConstant());
+   
    }
    
    public Expression expression() {
@@ -208,12 +222,17 @@ public class Parser {
          lex.eatKeyword("int");
          schema.addIntField(fldname);
       }
-      else {
+      else if (lex.matchKeyword("varchar")) {
          lex.eatKeyword("varchar");
          lex.eatDelim('(');
          int strLen = lex.eatIntConstant();
          lex.eatDelim(')');
          schema.addStringField(fldname, strLen);
+      }
+      // eating timestamp keyword and add to schema
+      else {
+         lex.eatKeyword("timestamp");
+         schema.addTimeField(fldname);
       }
       return schema;
    }

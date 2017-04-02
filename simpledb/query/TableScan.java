@@ -1,8 +1,9 @@
 package simpledb.query;
 
-import static java.sql.Types.INTEGER;
+import static java.sql.Types.*;
 import simpledb.tx.Transaction;
 import simpledb.record.*;
+import java.util.Date;
 
 /**
  * The Scan class corresponding to a table.
@@ -79,8 +80,11 @@ public class TableScan implements UpdateScan {
    public void setVal(String fldname, Constant val) {
       if (sch.type(fldname) == INTEGER)
          rf.setInt(fldname, (Integer)val.asJavaVal());
+      else if (sch.type(fldname) == VARCHAR)
+        rf.setString(fldname, (String)val.asJavaVal());
+      // if value to be set is a timestamp
       else
-         rf.setString(fldname, (String)val.asJavaVal());
+        rf.setTimestamp(fldname, val.toString());
    }
    
    public void setInt(String fldname, int val) {

@@ -3,6 +3,7 @@ package simpledb.file;
 import simpledb.server.SimpleDB;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+import java.util.Date;
 
 /**
  * The contents of a disk block in memory.
@@ -151,6 +152,33 @@ public class Page {
     * @param val the string to be written to the page
     */
    public synchronized void setString(int offset, String val) {
+      contents.position(offset);
+      byte[] byteval = val.getBytes();
+      contents.putInt(byteval.length);
+      contents.put(byteval);
+   }
+
+   /**
+    * Returns the timestamp value at the specified offset of the page.
+    * If a timestamp was not stored at that location,
+    * the behavior of the method is unpredictable.
+    * @param offset the byte offset within the page
+    * @return the timestamp value at that offset
+    */
+   public synchronized String getTimestamp(int offset) {
+      contents.position(offset);
+      int len = contents.getInt();
+      byte[] byteval = new byte[len];
+      contents.get(byteval);
+      return new String(byteval);
+   }
+
+   /**
+    * Writes a string to the specified offset on the page.
+    * @param offset the byte offset within the page
+    * @param val the string to be written to the page
+    */
+   public synchronized void setTimestamp(int offset, String val) {
       contents.position(offset);
       byte[] byteval = val.getBytes();
       contents.putInt(byteval.length);

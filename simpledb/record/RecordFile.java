@@ -2,6 +2,7 @@ package simpledb.record;
 
 import simpledb.file.Block;
 import simpledb.tx.Transaction;
+import java.util.Date;
 
 /**
  * Manages a file of records.
@@ -99,6 +100,16 @@ public class RecordFile {
     */
    public void setString(String fldname, String val) {
       rp.setString(fldname, val);
+   }
+
+   /**
+    * Sets the value of the specified field 
+    * in the current record.
+    * @param fldname the name of the field
+    * @param val the new value for the field
+    */
+   public void setTimestamp(String fldname, String val) {
+      rp.setTimestamp(fldname, val);
    }
    
    /**
