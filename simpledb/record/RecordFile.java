@@ -80,6 +80,16 @@ public class RecordFile {
    public String getString(String fldname) {
       return rp.getString(fldname);
    }
+
+   /**
+    * Returns the value of the specified field
+    * in the current record.
+    * @param fldname the name of the field
+    * @return the timestamp (long) value at that field
+    */
+   public long getTimestamp(String fldname) {
+      return rp.getTimestamp(fldname);
+   }
    
    /**
     * Sets the value of the specified field 

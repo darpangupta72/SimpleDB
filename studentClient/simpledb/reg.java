@@ -21,7 +21,8 @@ public class reg {
 							 "(3, '2011-10-08 22:00:00')",
 							 "(4, '2012-10-08 10:00:00')",
 							 "(5, '2013-11-08 11:50:00')",
-							 "(6, '2013-10-09 23:55:00')" };
+							 "(6, '2013-10-09 23:55:00')",
+							 "(7, '2011-10-08 22:00:00')" };
 			for (int i=0; i<vals.length; i++)
 				stmt.executeUpdate(s + vals[i]);
 			System.out.println("example records inserted.");

@@ -52,8 +52,10 @@ public class TableScan implements UpdateScan {
    public Constant getVal(String fldname) {
       if (sch.type(fldname) == INTEGER)
          return new IntConstant(rf.getInt(fldname));
-      else
+      else if((sch.type(fldname) == VARCHAR))
          return new StringConstant(rf.getString(fldname));
+      else
+         return new timestamp(rf.getTimestamp(fldname));
    }
    
    public int getInt(String fldname) {

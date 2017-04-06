@@ -21,6 +21,14 @@ public class timestamp implements Constant {
    public timestamp(String s) throws ParseException {
       val = simpleDateFormat.parse(s);
    }
+
+   /**
+    * Create a constant using a date created from milliseconds since 1970-01-01 00:00:00
+    * @param l the long value
+    */
+   public timestamp(Long l) {
+      val = new Date(l);
+   }
    
    /**
     * Unwraps the string and returns it.

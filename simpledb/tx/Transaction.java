@@ -126,6 +126,21 @@ public class Transaction {
       Buffer buff = myBuffers.getBuffer(blk);
       return buff.getString(offset);
    }
+
+   /**
+    * Returns the timestamp (long) value stored at the
+    * specified offset of the specified block.
+    * The method first obtains an SLock on the block,
+    * then it calls the buffer to retrieve the value.
+    * @param blk a reference to a disk block
+    * @param offset the byte offset within the block
+    * @return the timestamp (long) stored at that offset
+    */
+   public long getTimestamp(Block blk, int offset) {
+      concurMgr.sLock(blk);
+      Buffer buff = myBuffers.getBuffer(blk);
+      return buff.getTimestamp(offset);
+   }
    
    /**
     * Stores an integer at the specified offset 
