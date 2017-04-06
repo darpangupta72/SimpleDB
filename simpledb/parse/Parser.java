@@ -232,7 +232,7 @@ public class Parser {
       // eating timestamp keyword and add to schema
       else {
          lex.eatKeyword("timestamp");
-         schema.addTimeField(fldname);
+         schema.addTimestampField(fldname);
       }
       return schema;
    }

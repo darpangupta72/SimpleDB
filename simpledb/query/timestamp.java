@@ -35,10 +35,9 @@ public class timestamp implements Constant {
       return t != null && val.equals(t.val);
    }
    
-   public int compareTo(Constant c) {
-      // StringConstant sc = (StringConstant) c;
-      // return val.compareTo(sc.val);
-      return 1;
+   public int compareTo(Constant obj) {
+      timestamp t = (timestamp) obj;
+      return val.compareTo(t.val);
    }
    
    public int hashCode() {

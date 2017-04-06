@@ -3,7 +3,6 @@ package simpledb.record;
 import static simpledb.file.Page.*;
 import simpledb.file.Block;
 import simpledb.tx.Transaction;
-import java.util.Date;
 
 /**
  * Manages the placement and access of records in a block.
@@ -100,7 +99,17 @@ public class RecordPage {
     * @param fldname the name of the field
     * @param val the date value stored in that field
     */
-   public void setTimestamp(String fldname, String val) {
+   // public void setTimestamp(String fldname, String val) {
+   //    int position = fieldpos(fldname);
+   //    tx.setTimestamp(blk, position, val);
+   // }
+
+   // public void setTimestamp(String fldname, Date val) {
+   //    int position = fieldpos(fldname);
+   //    tx.setTimestamp(blk, position, val);
+   // }
+
+   public void setTimestamp(String fldname, long val) {
       int position = fieldpos(fldname);
       tx.setTimestamp(blk, position, val);
    }

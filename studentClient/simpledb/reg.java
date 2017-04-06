@@ -15,10 +15,13 @@ public class reg {
 			stmt.executeUpdate(s);
 			System.out.println("Table example created.");
 
-			s = "insert into example(recordID, recordTime) values ";
+			s = "insert into example(recordID, recordTime) values";
 			String[] vals = {"(1, '2011-10-09 20:00:00')",
-							 "(2, '2011-10-09 21:00:00')",
-							 "(3, '2011-10-09 22:00:00')" };
+							 "(2, '2011-11-09 21:00:00')",
+							 "(3, '2011-10-08 22:00:00')",
+							 "(4, '2012-10-08 10:00:00')",
+							 "(5, '2013-11-08 11:50:00')",
+							 "(6, '2013-10-09 23:55:00')" };
 			for (int i=0; i<vals.length; i++)
 				stmt.executeUpdate(s + vals[i]);
 			System.out.println("example records inserted.");
