@@ -314,4 +314,3 @@ VII. The Organization of the Server Code
    The textbook "Database Design and Implementation" describes these
    packages in considerably more detail. For further information, go
    to the URL www.wiley.com/college/sciore
-   

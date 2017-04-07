@@ -29,6 +29,7 @@ public class BTreeIndex implements Index {
    public BTreeIndex(String idxname, Schema leafsch, Transaction tx) {
       this.tx = tx;
       // deal with the leaves
+      System.out.println("Creating BTreeIndex");
       String leaftbl = idxname + "leaf";
       leafTi = new TableInfo(leaftbl, leafsch);
       if (tx.size(leafTi.fileName()) == 0)
@@ -105,16 +106,17 @@ public class BTreeIndex implements Index {
     * @see simpledb.index.Index#insert(simpledb.query.Constant, simpledb.record.RID)
     */
    public void insert(Constant dataval, RID datarid) {
-      beforeFirst(dataval);
-      DirEntry e = leaf.insert(datarid);
-      leaf.close();
-      if (e == null)
-         return;
-      BTreeDir root = new BTreeDir(rootblk, dirTi, tx);
-      DirEntry e2 = root.insert(e);
-      if (e2 != null)
-         root.makeNewRoot(e2);
-      root.close();
+		System.out.println("Insertion into BTreeIndex");
+	    beforeFirst(dataval);
+	    DirEntry e = leaf.insert(datarid);
+	    leaf.close();
+	    if (e == null)
+	    	return;
+	    BTreeDir root = new BTreeDir(rootblk, dirTi, tx);
+	    DirEntry e2 = root.insert(e);
+	    if (e2 != null)
+	    	root.makeNewRoot(e2);
+	    root.close();
    }
 
    /**
