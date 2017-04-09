@@ -55,6 +55,23 @@ public class BTreeLeaf {
       else 
          return tryOverflow();
    }
+
+   /**
+    * Moves to the next leaf record having the 
+    * search key less than val2.
+    * Returns false if there is no more such records.
+    * @return false if there are no more leaf records having search key less than val2
+    */
+   public boolean next(Constant val2) {
+      currentslot++;
+
+      if (currentslot >= contents.getNumRecs()) 
+         return tryOverflow();
+      else if (contents.getDataVal(currentslot).compareTo(val2)<=0)
+         return true;
+      else 
+         return tryOverflow();
+   }
    
    /**
     * Returns the dataRID value of the current leaf record.

@@ -64,6 +64,11 @@ public class HashIndex implements Index {
 		return false;
 	}
 
+	public boolean next(Constant val2){
+		return false;
+	}
+   
+
 	/**
 	 * Retrieves the dataRID from the current record
 	 * in the table scan for the bucket.
