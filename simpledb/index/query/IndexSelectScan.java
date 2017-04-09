@@ -87,6 +87,14 @@ public class IndexSelectScan implements Scan {
    public String getString(String fldname) {
       return ts.getString(fldname);
    }
+
+   /**
+    * Returns the value of the field of the current data record.
+    * @see simpledb.query.Scan#getTimestamp(java.lang.String)
+    */
+   public long getTimestamp(String fldname) {
+      return ts.getTimestamp(fldname);
+   }
    
    /**
     * Returns whether the data record has the specified field.

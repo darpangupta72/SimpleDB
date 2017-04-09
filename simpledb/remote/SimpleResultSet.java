@@ -41,6 +41,15 @@ public class SimpleResultSet extends ResultSetAdapter {
          throw new SQLException(e);
       }
    }
+
+   public long getLong(String fldname) throws SQLException {
+      try {
+         return rrs.getLong(fldname);
+      }
+      catch (Exception e) {
+         throw new SQLException(e);
+      }
+   }
    
    public ResultSetMetaData getMetaData() throws SQLException {
       try {

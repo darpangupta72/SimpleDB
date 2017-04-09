@@ -65,6 +65,10 @@ public class TableScan implements UpdateScan {
    public String getString(String fldname) {
       return rf.getString(fldname);
    }
+
+   public long getTimestamp(String fldname) {
+      return rf.getTimestamp(fldname);
+   }
    
    public boolean hasField(String fldname) {
       return sch.hasField(fldname);
