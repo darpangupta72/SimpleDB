@@ -24,6 +24,14 @@ public interface Index {
     * @return false if no other index records have the search key.
     */
    public boolean next();
+
+   /**
+    * Moves the index to the next record having the
+    * search key less than val2(for between queries) 
+    * Returns false if there are no more such index records.
+    * @return false if no other index records have the search key.
+    */
+   public boolean next(Constant val2);
    
    /**
     * Returns the dataRID value stored in the current index record. 

@@ -51,9 +51,19 @@ public class Parser {
    
    public Term term() {
       Expression lhs = expression();
-      lex.eatDelim('=');
-      Expression rhs = expression();
-      return new Term(lhs, rhs);
+      Expression rhs;
+      Expression range=null;
+      if(lex.matchDelim('=')){
+         lex.eatDelim('=');
+         rhs = expression();
+      }
+      else {
+         lex.eatKeyword("between");
+         rhs = expression();
+         range = expression();
+
+      }
+      return new Term(lhs, rhs,range);
    }
    
    public Predicate predicate() {

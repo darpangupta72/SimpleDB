@@ -11,7 +11,7 @@ import simpledb.index.Index;
  */
 public class IndexSelectScan implements Scan {
    private Index idx;
-   private Constant val;
+   private Constant val1,val2;
    private TableScan ts;
    
    /**
@@ -20,9 +20,10 @@ public class IndexSelectScan implements Scan {
     * @param idx the index
     * @param val the selection constant
     */
-   public IndexSelectScan(Index idx, Constant val, TableScan ts) {
+   public IndexSelectScan(Index idx, Constant val1, Constant val2, TableScan ts) {
       this.idx = idx;
-      this.val = val;
+      this.val1 = val1;
+      this.val2 = val2;
       this.ts  = ts;
       beforeFirst();
    }
@@ -34,7 +35,7 @@ public class IndexSelectScan implements Scan {
     * @see simpledb.query.Scan#beforeFirst()
     */
    public void beforeFirst() {
-      idx.beforeFirst(val);
+      idx.beforeFirst(val1);
    }
    
    /**
@@ -47,12 +48,26 @@ public class IndexSelectScan implements Scan {
     * @see simpledb.query.Scan#next()
     */
    public boolean next() {
-      boolean ok = idx.next();
-      if (ok) {
-         RID rid = idx.getDataRid();
-         ts.moveToRid(rid);
+
+      boolean ok;
+      if(val2==null){
+        ok = idx.next();
+        if (ok) {
+           RID rid = idx.getDataRid();
+           ts.moveToRid(rid);
+        }
+        return ok;
       }
-      return ok;
+      else{
+        //System.out.println("Calling created Function");
+        ok=idx.next(val2);
+        if(ok){
+          RID rid = idx.getDataRid();
+          ts.moveToRid(rid);
+        }
+        return ok;
+      }
+
    }
    
    /**

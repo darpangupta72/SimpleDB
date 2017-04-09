@@ -91,6 +91,17 @@ public class BTreeIndex implements Index {
     }
 
     /**
+    * Moves to the next leaf record having the
+    * search key less than val2.
+    * Returns false if there are no more such leaf records.
+    * @see simpledb.index.Index#next()
+    */
+    public boolean next(Constant val2) {
+      return leaf.next(val2);
+    }
+
+
+    /**
     * Returns the dataRID value from the current leaf record.
     * @see simpledb.index.Index#getDataRid()
     */
