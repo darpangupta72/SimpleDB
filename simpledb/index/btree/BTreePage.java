@@ -1,11 +1,12 @@
 package simpledb.index.btree;
 
-import static java.sql.Types.INTEGER;
+import static java.sql.Types.*;
 import static simpledb.file.Page.*;
 import simpledb.file.Block;
 import simpledb.record.*;
 import simpledb.query.*;
 import simpledb.tx.Transaction;
+import java.util.Date;
 
 /**
  * B-tree directory and leaf pages have many commonalities:
@@ -195,14 +196,26 @@ public class BTreePage {
       int pos = fldpos(slot, fldname);
       return tx.getString(currentblk, pos);
    }
+
+   private long getTimestamp(int slot, String fldname){
+   		int pos = fldpos(slot, fldname);
+   		return tx.getTimestamp(currentblk, pos);
+   }
    
    private Constant getVal(int slot, String fldname) {
       int type = ti.schema().type(fldname);
+      //System.out.println(type);
       if (type == INTEGER)
          return new IntConstant(getInt(slot, fldname));
-      else
+      else if(type == VARCHAR ){
+      		//System.out.println("Returning StringConstant ");
          return new StringConstant(getString(slot, fldname));
-   }
+      }
+      else{
+      	//System.out.println("Returning timestamp");
+      	return new timestamp(getTimestamp(slot, fldname));
+      }
+    }
    
    private void setInt(int slot, String fldname, int val) {
       int pos = fldpos(slot, fldname);
@@ -214,12 +227,23 @@ public class BTreePage {
       tx.setString(currentblk, pos, val);
    }
    
+   private void setTimestamp(int slot, String fldname, long val){
+   		int pos = fldpos(slot, fldname);
+   		tx.setTimestamp(currentblk, pos, val);
+   }
+
    private void setVal(int slot, String fldname, Constant val) {
       int type = ti.schema().type(fldname);
       if (type == INTEGER)
          setInt(slot, fldname, (Integer)val.asJavaVal());
-      else
+      else if(type == VARCHAR ){
+      		//System.out.println("Setting String");
          setString(slot, fldname, (String)val.asJavaVal());
+      }
+      else{
+      		//System.out.println("Setting Long");
+      	setTimestamp(slot, fldname, (Long)((Date)val.asJavaVal()).getTime());
+      }
    }
    
    private void setNumRecs(int n) {

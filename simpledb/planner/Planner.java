@@ -40,6 +40,7 @@ public class Planner {
     * @return an integer denoting the number of affected records
     */
    public int executeUpdate(String cmd, Transaction tx) {
+   	  //System.out.println("Reached Hre");
       Parser parser = new Parser(cmd);
       Object obj = parser.updateCmd();
       if (obj instanceof InsertData)
@@ -52,8 +53,9 @@ public class Planner {
          return uplanner.executeCreateTable((CreateTableData)obj, tx);
       else if (obj instanceof CreateViewData)
          return uplanner.executeCreateView((CreateViewData)obj, tx);
-      else if (obj instanceof CreateIndexData)
+      else if (obj instanceof CreateIndexData) {
          return uplanner.executeCreateIndex((CreateIndexData)obj, tx);
+      	}
       else
          return 0;
    }

@@ -26,6 +26,7 @@ public class HashIndex implements Index {
 	 * @param tx the calling transaction
 	 */
 	public HashIndex(String idxname, Schema sch, Transaction tx) {
+		System.out.println("HashIndex created");
 		this.idxname = idxname;
 		this.sch = sch;
 		this.tx = tx;
@@ -79,6 +80,7 @@ public class HashIndex implements Index {
 	 * @see simpledb.index.Index#insert(simpledb.query.Constant, simpledb.record.RID)
 	 */
 	public void insert(Constant val, RID rid) {
+		System.out.println("Insertion into HashIndex");
 		beforeFirst(val);
 		ts.insert();
 		ts.setInt("block", rid.blockNumber());
