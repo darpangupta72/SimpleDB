@@ -160,7 +160,7 @@ public class BTreeLeaf {
          Block newblk = contents.split(splitpos, contents.getFlag());
          // System.out.println("Block no:" +newblk.number());
          contents.setFlag(newblk.number());
-         return null;
+         return new DirEntry(splitkey, newblk.number());
       }       
    }
    
