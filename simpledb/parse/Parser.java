@@ -4,6 +4,7 @@ import java.util.*;
 import simpledb.query.*;
 import simpledb.record.Schema;
 // To catch in case input string is not a timestamp
+import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 /**
@@ -23,14 +24,36 @@ public class Parser {
    public String field() {
       return lex.eatId();
    }
+
+   public boolean isValid(String s1) {
+      
+      boolean isvalid = false;
+      try {
+      
+         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+         String s2 = sdf.format(sdf.parse(s1));
+         isvalid = s1.equals(s2);
+      
+      } catch (Exception e) {}
+      
+      return isvalid;
+
+   }
    
-   public Constant constant() {
+   public Constant constant() throws RuntimeException {
       
       if (lex.matchStringConstant()){
       
          String inputString = lex.eatStringConstant();
          try {
-            return new timestamp(inputString);
+         	
+         	timestamp t = new timestamp(inputString);
+         	
+         	if(isValid(inputString))
+         		return t;
+         	else 
+         		throw new RuntimeException("InvalidDateFormatError");
+         
          } catch(ParseException e) {
             return new StringConstant(inputString);
          }
@@ -42,14 +65,14 @@ public class Parser {
    
    }
    
-   public Expression expression() {
+   public Expression expression() throws RuntimeException {
       if (lex.matchId())
          return new FieldNameExpression(field());
       else
          return new ConstantExpression(constant());
    }
    
-   public Term term() {
+   public Term term() throws RuntimeException {
       Expression lhs = expression();
       Expression rhs;
       Expression range=null;
@@ -66,7 +89,7 @@ public class Parser {
       return new Term(lhs, rhs,range);
    }
    
-   public Predicate predicate() {
+   public Predicate predicate() throws RuntimeException {
       Predicate pred = new Predicate(term());
       if (lex.matchKeyword("and")) {
          lex.eatKeyword("and");
@@ -77,7 +100,7 @@ public class Parser {
    
 // Methods for parsing queries
    
-   public QueryData query() {
+   public QueryData query() throws RuntimeException {
       lex.eatKeyword("select");
       Collection<String> fields = selectList();
       lex.eatKeyword("from");
@@ -112,7 +135,7 @@ public class Parser {
    
 // Methods for parsing the various update commands
    
-   public Object updateCmd() {
+   public Object updateCmd() throws RuntimeException {
       if (lex.matchKeyword("insert"))
          return insert();
       else if (lex.matchKeyword("delete"))
@@ -123,7 +146,7 @@ public class Parser {
          return create();
    }
    
-   private Object create() {
+   private Object create() throws RuntimeException {
       lex.eatKeyword("create");
       if (lex.matchKeyword("table"))
          return createTable();
@@ -135,7 +158,7 @@ public class Parser {
    
 // Method for parsing delete commands
    
-   public DeleteData delete() {
+   public DeleteData delete() throws RuntimeException {
       lex.eatKeyword("delete");
       lex.eatKeyword("from");
       String tblname = lex.eatId();
@@ -149,7 +172,7 @@ public class Parser {
    
 // Methods for parsing insert commands
    
-   public InsertData insert() {
+   public InsertData insert() throws RuntimeException {
       lex.eatKeyword("insert");
       lex.eatKeyword("into");
       String tblname = lex.eatId();
@@ -173,7 +196,7 @@ public class Parser {
       return L;
    }
    
-   private List<Constant> constList() {
+   private List<Constant> constList() throws RuntimeException {
       List<Constant> L = new ArrayList<Constant>();
       L.add(constant());
       if (lex.matchDelim(',')) {
@@ -185,7 +208,7 @@ public class Parser {
    
 // Method for parsing modify commands
    
-   public ModifyData modify() {
+   public ModifyData modify() throws RuntimeException {
       lex.eatKeyword("update");
       String tblname = lex.eatId();
       lex.eatKeyword("set");
@@ -249,7 +272,7 @@ public class Parser {
    
 // Method for parsing create view commands
    
-   public CreateViewData createView() {
+   public CreateViewData createView() throws RuntimeException {
       lex.eatKeyword("view");
       String viewname = lex.eatId();
       lex.eatKeyword("as");
@@ -271,4 +294,3 @@ public class Parser {
       return new CreateIndexData(idxname, tblname, fldname);
    }
 }
-

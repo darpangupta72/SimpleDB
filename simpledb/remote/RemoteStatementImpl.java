@@ -25,7 +25,7 @@ class RemoteStatementImpl extends UnicastRemoteObject implements RemoteStatement
     * RemoteResultSetImpl constructor for processing.
     * @see simpledb.remote.RemoteStatement#executeQuery(java.lang.String)
     */
-   public RemoteResultSet executeQuery(String qry) throws RemoteException {
+   public RemoteResultSet executeQuery(String qry) throws RemoteException, RuntimeException {
       try {
          Transaction tx = rconn.getTransaction();
          Plan pln = SimpleDB.planner().createQueryPlan(qry, tx);
@@ -43,9 +43,12 @@ class RemoteStatementImpl extends UnicastRemoteObject implements RemoteStatement
     * which executes it.
     * @see simpledb.remote.RemoteStatement#executeUpdate(java.lang.String)
     */
-   public int executeUpdate(String cmd) throws RemoteException {
+   public int executeUpdate(String cmd) throws RemoteException, RuntimeException {
       try {
+<<<<<<< HEAD
         //System.out.println(cmd);
+=======
+>>>>>>> 3c10658d0ef301f829632e0165422b136aff1140
          Transaction tx = rconn.getTransaction();
          int result = SimpleDB.planner().executeUpdate(cmd, tx);
          rconn.commit();

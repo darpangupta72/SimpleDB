@@ -34,7 +34,10 @@ public class IndexUpdatePlanner implements UpdatePlanner {
       Iterator<Constant> valIter = data.vals().iterator();
       for (String fldname : data.fields()) {
          Constant val = valIter.next();
+<<<<<<< HEAD
          //System.out.println("Modify field " + fldname + " to val " + val);
+=======
+>>>>>>> 3c10658d0ef301f829632e0165422b136aff1140
          s.setVal(fldname, val);
          
          IndexInfo ii = indexes.get(fldname);
