@@ -76,8 +76,11 @@ public class BTreePage {
     */
    public Block split(int splitpos, int flag) {
       Block newblk = appendNew(flag);
+      // System.out.println("1 "+ flag);
       BTreePage newpage = new BTreePage(newblk, ti, tx);
+      // System.out.println("2 "+flag);
       transferRecs(splitpos, newpage);
+      // System.out.println("3 " + flag);
       newpage.setFlag(flag);
       newpage.close();
       return newblk;
@@ -105,6 +108,7 @@ public class BTreePage {
     * @param val the new value of the page flag
     */
    public void setFlag(int val) {
+      // System.out.println(" Flag is being set to " + val);
       tx.setInt(currentblk, 0, val);
    }
    

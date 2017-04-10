@@ -50,6 +50,10 @@ public class HashIndex implements Index {
 		ts = new TableScan(ti, tx);
 	}
 
+	public void beforeFirst(Constant val1, Constant val2){
+		beforeFirst(val1);
+	}
+
 	/**
 	 * Moves to the next record having the search key.
 	 * The method loops through the table scan for the bucket,

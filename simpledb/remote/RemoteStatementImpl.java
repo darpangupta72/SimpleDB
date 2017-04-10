@@ -45,7 +45,7 @@ class RemoteStatementImpl extends UnicastRemoteObject implements RemoteStatement
     */
    public int executeUpdate(String cmd) throws RemoteException {
       try {
-        System.out.println(cmd);
+        //System.out.println(cmd);
          Transaction tx = rconn.getTransaction();
          int result = SimpleDB.planner().executeUpdate(cmd, tx);
          rconn.commit();

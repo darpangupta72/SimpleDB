@@ -35,7 +35,14 @@ public class IndexSelectScan implements Scan {
     * @see simpledb.query.Scan#beforeFirst()
     */
    public void beforeFirst() {
-      idx.beforeFirst(val1);
+      if(val2==null){
+        idx.beforeFirst(val1);
+      }
+
+      else{
+        idx.beforeFirst(val1,val2);
+      }
+
    }
    
    /**
