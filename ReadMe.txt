@@ -11,9 +11,9 @@ This document contains the following sections:
 
 I- Timestamp as a Type:
 	
-	1) Created a class simpledb.query.timestamp.java which implements simpledb.query.Constant.java.
+	1) Created a class simpledb.query.timestamp.java which implements simpledb.query.Constant.java
 
-	2) Implemented a isValid(String s1) and extended constant() & modify() in simpledb.parse.Parser.java to correctly identify and store timestamp data type.Also added "timestamp" keyword in simpledb.parse.Lexer,java
+	2) Implemented a isValid(String s1) and extended constant() & modify() in simpledb.parse.Parser.java to correctly identify and store timestamp data type. Also added "timestamp" keyword in simpledb.parse.Lexer.java
 
 	3) Created a class simpledb.tx.recovery.SetTimestampRecord.java which implements simpledb.tx.recovery.LogRecord.java. It is used to update the Log Records(writeToLog()). 
 	Also implemented a function setTimestamp(Buffer buff, int offset, long newval) in simpledb.tx.recovey.RecoveryMgr.java
@@ -49,6 +49,7 @@ I- Timestamp as a Type:
 		*simpledb.multibuffer.MultiBufferProductPlan.java
 		*simpledb.metadata.StatInfo.java
 		*simpledb.materialize.MaterializePlan.java
+	   to maintain the number of records in any relation so that no more than 10^5 tuples are inserted in any relation. Throw an exception (MemoryError) if number of tuples exceeds 10^5.
 
 II-Timestamp in BTree Index:
 	
@@ -60,8 +61,6 @@ II-Timestamp in BTree Index:
 		*simpledb.index.query.IndexSelectPlan.java
 		*simpledb.index.query.IndexJoinScan.java
 		*simpledb.index.btree.BTreePage.java
-		*
-
 
 	to insert, delete, and update timestamp datatype.
 	Also long nextTimestamp() in simpledb.log.BasicLogRecord.java
@@ -70,7 +69,7 @@ II-Timestamp in BTree Index:
 		*simpledb.index.query.IndexSelectPlan.java
 		*simpledb.index.query.IndexJoinPlan.java
 		*simpledb.index.planner.IndexupdatePlanner.java
-	to throw MemoryError.
+	   to maintain the number of records in any relation so that no more than 10^5 tuples are inserted in any relation. Throw an exception (MemoryError) if number of tuples exceeds 10^5.
 
 	5) Some minor changes in files such as simpledb.btree.BTreeFormatter.java
 
