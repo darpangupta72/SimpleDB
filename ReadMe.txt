@@ -78,7 +78,7 @@ III- Between Query in Basic PLan:
 
 	2)Added a function equatesWithUpper(String fldname) in simpledb.query.Predicate.java
 
-	3)In general plan, function issatisfied() in simpledb.query.Term() is called for all tuples in the table.
+	3)In general plan, function isSatisfied() in simpledb.query.Term.java is called for all tuples in the table.
 
 IV- Between Query with BTree Indexing:
 	1) Created functions boolean next(Constant val) and and beforeFirst(Constant val1, Constant val2) in
@@ -87,3 +87,7 @@ IV- Between Query with BTree Indexing:
 		*simpledb.index.btree.BTreeLeaf.java
 
 	2) Changed insert(RID datarid) in simpledb.index.btree.BTreeLeaf.java to correctly connect the leafs. Original algo is correct for only equalTo queries.
+
+	3) Minor changes in simpledb.opt.TablePlanner.java to accomodate the change in simpledb.query.Term.java due to between queries.
+
+	4) In B-Tree indexing, the isSatisfied() function of simpledb.query.Term.java is called for only those tuples which have timestamps greater (later) than the earlier timestamp specified in the query. This ends when all the timestamps are less (earlier) than the latter timestamp specified in the query.
