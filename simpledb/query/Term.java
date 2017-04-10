@@ -20,6 +20,9 @@ public class Term {
       this.lhs = lhs;
       this.rhs = rhs;
       this.range= range;
+      if(range!=null)
+      if(rhs.asConstant().compareTo(range.asConstant())>0)
+      	throw new RuntimeException("InvalidIntervalError");
    }
    
    /**
@@ -168,26 +171,17 @@ public class Term {
     */
    public boolean isSatisfied(Scan s) {
     if(range==null){
-     // System.out.println("Inside range null");
       Constant lhsval = lhs.evaluate(s);
       Constant rhsval = rhs.evaluate(s);
       return rhsval.equals(lhsval);
     }
     else{
-      //System.out.println("Inside range not null");
       Constant lhsval = lhs.evaluate(s);
       Constant val1 = rhs.evaluate(s);
       Constant val2 = range.evaluate(s);
-      //System.out.println(lhsval.asJavaVal());
-      if(val1.compareTo(val2)>0){
-        System.out.println("Wrong Between statement");
-        return false;
-      }
-      else{
-        if((lhsval.compareTo(val1)>=0)&&(lhsval.compareTo(val2)<=0))
-          return true;
-        return false;
-      }
+      if((lhsval.compareTo(val1)>=0)&&(lhsval.compareTo(val2)<=0))
+        return true;
+      return false;
     }
    }
    

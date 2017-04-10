@@ -34,6 +34,8 @@ public class IndexUpdatePlanner implements UpdatePlanner {
       Iterator<Constant> valIter = data.vals().iterator();
       for (String fldname : data.fields()) {
          Constant val = valIter.next();
+         if(p.recordsOutput() >= 100000)
+            throw new RuntimeException("MemoryError");
          s.setVal(fldname, val);
          
          IndexInfo ii = indexes.get(fldname);
@@ -43,6 +45,7 @@ public class IndexUpdatePlanner implements UpdatePlanner {
             idx.close();
          }
       }
+      p.incrementnumrecs();
       s.close();
       return 1;
    }
@@ -66,6 +69,7 @@ public class IndexUpdatePlanner implements UpdatePlanner {
          }
          // then delete the record
          s.delete();
+         p.decrementnumrecs();
          count++;
       }
       s.close();

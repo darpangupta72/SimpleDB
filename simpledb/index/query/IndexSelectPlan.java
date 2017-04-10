@@ -76,4 +76,8 @@ public class IndexSelectPlan implements Plan {
    public Schema schema() {
       return p.schema(); 
    }
+
+   public void incrementnumrecs() {}
+   
+   public void decrementnumrecs() {}
 }
