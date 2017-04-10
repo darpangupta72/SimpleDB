@@ -150,4 +150,9 @@ public class SortPlan implements Plan {
          dest.setVal(fldname, src.getVal(fldname));
       return src.next();
    }
+
+   public void incrementnumrecs() {}
+
+   public void decrementnumrecs() {}
+   
 }

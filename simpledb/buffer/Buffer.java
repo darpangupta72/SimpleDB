@@ -68,14 +68,6 @@ public class Buffer {
     * @param offset the byte offset of the page
     * @return the timestamp value at that offset
     */
-   // public String getTimestamp(int offset) {
-   //    return contents.getTimestamp(offset);
-   // }
-
-   // public Date getTimestamp(int offset) {
-   //    return contents.getTimestamp(offset);
-   // }
-
    public long getTimestamp(int offset) {
       return contents.getTimestamp(offset);
    }
@@ -136,20 +128,6 @@ public class Buffer {
     * @param txnum the id of the transaction performing the modification
     * @param lsn the LSN of the corresponding log record
     */
-   // public void setTimestamp(int offset, String val, int txnum, int lsn) {
-   //    modifiedBy = txnum;
-   //    if (lsn >= 0)
-   //      logSequenceNumber = lsn;
-   //    contents.setTimestamp(offset, val);
-   // }
-
-   // public void setTimestamp(int offset, Date val, int txnum, int lsn) {
-   //    modifiedBy = txnum;
-   //    if (lsn >= 0)
-   //      logSequenceNumber = lsn;
-   //    contents.setTimestamp(offset, val);
-   // }
-
    public void setTimestamp(int offset, long val, int txnum, int lsn) {
       modifiedBy = txnum;
       if (lsn >= 0)

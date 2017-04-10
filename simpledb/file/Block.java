@@ -20,8 +20,6 @@ public class Block {
    public Block(String filename, int blknum) {
       this.filename = filename;
       this.blknum   = blknum;
-      // if(filename.equals("btreeindexleaf.tbl"))
-      // System.out.println("Inside Block : "+filename+ "  " + blknum);
    }
    
    /**
@@ -37,8 +35,6 @@ public class Block {
     * @return the block number
     */
    public int number() {
-      // if(filename.equals("btreeindexleaf.tbl"))
-      // System.out.println("Inside Block : "+filename+ "  " + blknum);
       return blknum;
    }
    

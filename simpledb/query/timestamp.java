@@ -45,9 +45,6 @@ public class timestamp implements Constant {
 
    public int compareTo(Constant obj) {
       timestamp t = (timestamp) obj;
-     // System.out.println(val+" Comparing with "+t.asJavaVal());
-      //System.out.print(val);
-     // System.out.println(val.compareTo(t.val));
       return val.compareTo(t.val);
    }
 
