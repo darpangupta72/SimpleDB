@@ -128,5 +128,8 @@ public class GroupByScan implements Scan {
          return true;
       return false;
    }
+
+   public long getTimestamp(String fldname) { return -1; }
+   
 }
 

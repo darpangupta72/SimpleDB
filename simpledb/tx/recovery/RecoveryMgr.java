@@ -95,24 +95,6 @@ public class RecoveryMgr {
     * @param offset the offset of the value in the page
     * @param newval the value to be written
     */
-   // public int setTimestamp(Buffer buff, int offset, String newval) {
-   //    String oldval = buff.getTimestamp(offset);
-   //    Block blk = buff.block();
-   //    if (isTempBlock(blk))
-   //       return -1;
-   //    else
-   //       return new SetTimestampRecord(txnum, blk, offset, oldval).writeToLog();
-   // }
-
-   // public int setTimestamp(Buffer buff, int offset, Date newval) {
-   //    Date oldval = buff.getTimestamp(offset);
-   //    Block blk = buff.block();
-   //    if (isTempBlock(blk))
-   //       return -1;
-   //    else
-   //       return new SetTimestampRecord(txnum, blk, offset, oldval).writeToLog();
-   // }
-
    public int setTimestamp(Buffer buff, int offset, long newval) {
       long oldval = buff.getTimestamp(offset);
       Block blk = buff.block();

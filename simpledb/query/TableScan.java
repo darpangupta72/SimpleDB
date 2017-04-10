@@ -82,27 +82,7 @@ public class TableScan implements UpdateScan {
     * If INTEGER, then the record file's setInt method is called;
     * otherwise, the setString method is called.
     * @see simpledb.query.UpdateScan#setVal(java.lang.String, simpledb.query.Constant)
-    */ 
-   // public void setVal(String fldname, Constant val) {
-   //    if (sch.type(fldname) == INTEGER)
-   //       rf.setInt(fldname, (Integer)val.asJavaVal());
-   //    else if (sch.type(fldname) == VARCHAR)
-   //      rf.setString(fldname, (String)val.asJavaVal());
-   //    // if value to be set is a timestamp
-   //    else
-   //      rf.setTimestamp(fldname, val.toString());
-   // }
-
-   // public void setVal(String fldname, Constant val) {
-   //    if (sch.type(fldname) == INTEGER)
-   //       rf.setInt(fldname, (Integer)val.asJavaVal());
-   //    else if (sch.type(fldname) == VARCHAR)
-   //      rf.setString(fldname, (String)val.asJavaVal());
-   //    // if value to be set is a timestamp
-   //    else
-   //      rf.setTimestamp(fldname, (Date)val.asJavaVal());
-   // }
-
+    */
    public void setVal(String fldname, Constant val) {
       if (sch.type(fldname) == INTEGER)
          rf.setInt(fldname, (Integer)val.asJavaVal());

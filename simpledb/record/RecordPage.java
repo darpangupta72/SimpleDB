@@ -110,16 +110,6 @@ public class RecordPage {
     * @param fldname the name of the field
     * @param val the date value stored in that field
     */
-   // public void setTimestamp(String fldname, String val) {
-   //    int position = fieldpos(fldname);
-   //    tx.setTimestamp(blk, position, val);
-   // }
-
-   // public void setTimestamp(String fldname, Date val) {
-   //    int position = fieldpos(fldname);
-   //    tx.setTimestamp(blk, position, val);
-   // }
-
    public void setTimestamp(String fldname, long val) {
       int position = fieldpos(fldname);
       tx.setTimestamp(blk, position, val);

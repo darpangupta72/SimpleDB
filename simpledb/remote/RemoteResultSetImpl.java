@@ -4,8 +4,6 @@ import simpledb.record.Schema;
 import simpledb.query.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.Date;
-//import java.util.Date;
 
 /**
  * The RMI server-side implementation of RemoteResultSet.
@@ -77,31 +75,15 @@ class RemoteResultSetImpl extends UnicastRemoteObject implements RemoteResultSet
       }
    }
 
-   // /**
-   //  * Returns the timestamp (long) value of the specified field,
-   //  * by returning the corresponding value on the saved scan.
-   //  * @see simpledb.remote.RemoteResultSet#getTimestamp(java.lang.String)
-   //  */
-   // public long getLong(String fldname) throws RemoteException {
-   //  try {
-   //      fldname = fldname.toLowerCase(); // to ensure case-insensitivity
-   //      return s.getTimestamp(fldname);
-   //    }
-   //    catch(RuntimeException e) {
-   //       rconn.rollback();
-   //       throw e;
-   //    }
-   // }
-
    /**
-    * Returns the timestamp (java.sql.Date) value of the specified field,
+    * Returns the timestamp (long) value of the specified field,
     * by returning the corresponding value on the saved scan.
     * @see simpledb.remote.RemoteResultSet#getTimestamp(java.lang.String)
     */
-   public Date getDate(String fldname) throws RemoteException {
+   public long getLong(String fldname) throws RemoteException {
     try {
         fldname = fldname.toLowerCase(); // to ensure case-insensitivity
-        return new Date(s.getTimestamp(fldname));
+        return s.getTimestamp(fldname);
       }
       catch(RuntimeException e) {
          rconn.rollback();

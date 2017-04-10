@@ -195,20 +195,6 @@ public class Transaction {
     * @param offset a byte offset within that block
     * @param val the value to be stored
     */
-   // public void setTimestamp(Block blk, int offset, String val) {
-   //    concurMgr.xLock(blk);
-   //    Buffer buff = myBuffers.getBuffer(blk);
-   //    int lsn = recoveryMgr.setTimestamp(buff, offset, val);
-   //    buff.setTimestamp(offset, val, txnum, lsn);
-   // }
-
-   // public void setTimestamp(Block blk, int offset, Date val) {
-   //    concurMgr.xLock(blk);
-   //    Buffer buff = myBuffers.getBuffer(blk);
-   //    int lsn = recoveryMgr.setTimestamp(buff, offset, val);
-   //    buff.setTimestamp(offset, val, txnum, lsn);
-   // }
-
    public void setTimestamp(Block blk, int offset, long val) {
       concurMgr.xLock(blk);
       Buffer buff = myBuffers.getBuffer(blk);
