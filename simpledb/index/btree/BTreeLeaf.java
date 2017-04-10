@@ -179,7 +179,7 @@ public class BTreeLeaf {
    private boolean tryOverflow(Constant val2) {
       Constant firstkey = contents.getDataVal(0);
       int flag = contents.getFlag();
-      System.out.println("Get with it "+ flag);
+      // System.out.println("Get with it "+ flag);
       if (val2.compareTo(firstkey)<=0|| flag < 0)
         return false;
       contents.close();
