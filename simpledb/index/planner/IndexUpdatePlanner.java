@@ -32,12 +32,12 @@ public class IndexUpdatePlanner implements UpdatePlanner {
       // then modify each field, inserting an index record if appropriate
       Map<String,IndexInfo> indexes = SimpleDB.mdMgr().getIndexInfo(tblname, tx);
       Iterator<Constant> valIter = data.vals().iterator();
+      
+      if(p.recordsOutput() >= 100000)
+         throw new RuntimeException("MemoryError");
+      
       for (String fldname : data.fields()) {
          Constant val = valIter.next();
-
-         if(p.recordsOutput() >= 100000)
-            throw new RuntimeException("MemoryError");
-
          System.out.println("Modify field " + fldname + " to val " + val);
          s.setVal(fldname, val);
          
@@ -120,7 +120,6 @@ public class IndexUpdatePlanner implements UpdatePlanner {
    }
    
    public int executeCreateIndex(CreateIndexData data, Transaction tx) {
-      //System.out.println("Inside IndexUpdatePlanner");
       SimpleDB.mdMgr().createIndex(data.indexName(), data.tableName(), data.fieldName(), tx);
       return 0;
    }

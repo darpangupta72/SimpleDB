@@ -76,11 +76,8 @@ public class BTreePage {
     */
    public Block split(int splitpos, int flag) {
       Block newblk = appendNew(flag);
-      // System.out.println("1 "+ flag);
       BTreePage newpage = new BTreePage(newblk, ti, tx);
-      // System.out.println("2 "+flag);
       transferRecs(splitpos, newpage);
-      // System.out.println("3 " + flag);
       newpage.setFlag(flag);
       newpage.close();
       return newblk;
@@ -108,7 +105,7 @@ public class BTreePage {
     * @param val the new value of the page flag
     */
    public void setFlag(int val) {
-      // System.out.println(" Flag is being set to " + val);
+       System.out.println(" Flag is being set to " + val);
       tx.setInt(currentblk, 0, val);
    }
    
@@ -208,15 +205,12 @@ public class BTreePage {
    
    private Constant getVal(int slot, String fldname) {
       int type = ti.schema().type(fldname);
-      //System.out.println(type);
       if (type == INTEGER)
          return new IntConstant(getInt(slot, fldname));
       else if(type == VARCHAR ){
-      		//System.out.println("Returning StringConstant ");
          return new StringConstant(getString(slot, fldname));
       }
       else{
-      	//System.out.println("Returning timestamp");
       	return new timestamp(getTimestamp(slot, fldname));
       }
     }
@@ -241,11 +235,9 @@ public class BTreePage {
       if (type == INTEGER)
          setInt(slot, fldname, (Integer)val.asJavaVal());
       else if(type == VARCHAR ){
-      		//System.out.println("Setting String");
          setString(slot, fldname, (String)val.asJavaVal());
       }
       else{
-      		//System.out.println("Setting Long");
       	setTimestamp(slot, fldname, (Long)((Date)val.asJavaVal()).getTime());
       }
    }

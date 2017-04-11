@@ -42,9 +42,18 @@ public class SimpleResultSet extends ResultSetAdapter {
       }
    }
 
-   public long getLong(String fldname) throws SQLException {
+   // public long getLong(String fldname) throws SQLException {
+   //    try {
+   //       return rrs.getLong(fldname);
+   //    }
+   //    catch (Exception e) {
+   //       throw new SQLException(e);
+   //    }
+   // }
+
+   public Date getDate(String fldname) throws SQLException {
       try {
-         return rrs.getLong(fldname);
+         return new Date(rrs.getDate(fldname).getTime());
       }
       catch (Exception e) {
          throw new SQLException(e);

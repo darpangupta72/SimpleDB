@@ -46,8 +46,7 @@ public class IndexInfo {
     */
    public Index open() {
       Schema sch = schema();
-      // Create new HashIndex for hash indexing
-      //System.out.println("Returning a BTreeIndex");
+      // Create new BTreeIndex for BTree indexing
       Index idx = new BTreeIndex(idxname, sch, tx); 
       return idx;
    }
@@ -67,7 +66,7 @@ public class IndexInfo {
       TableInfo idxti = new TableInfo("", schema());
       int rpb = BLOCK_SIZE / idxti.recordLength();
       int numblocks = si.recordsOutput() / rpb;
-      // Call HashIndex.searchCost for hash indexing
+      // Call BTreeIndex.searchCost for hash indexing
       return BTreeIndex.searchCost(numblocks, rpb);
    }
    
